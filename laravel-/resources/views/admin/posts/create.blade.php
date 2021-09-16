@@ -53,6 +53,9 @@
               @foreach ($tags as $tag)
                 <div class="form-container d-block my-2">
                   <input type="checkbox" id="tag{{ $loop->iteration }}" value="{{$tag->id}}"
+                  @if(in_array($tag->id, old('tags', [])))
+                  checked
+                  @endif
                   name="tags[]">
                   <label for="tag{{ $loop->iteration }}" class="d-inline-block ml-2">{{$tag->name }}</label> 
                 </div>
