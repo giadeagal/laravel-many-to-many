@@ -14,6 +14,7 @@
           <tr>
             <th scope="col">Codice post</th>
             <th scope="col">Titolo</th>
+            <th scope="col">Categoria</th>
             <th scope="col">Azioni</th>
           </tr>
         </thead>
@@ -24,6 +25,11 @@
           <tr>
             <th scope="row">{{$post->id}}</th>
             <td>{{$post->title}}</td>
+            <td>
+              @if($post->category)
+              {{ $post->category->name }}
+              @endif
+            </td>
             <td>
                 <a href="{{route('admin.posts.show', $post->slug)}}" class="btn btn-primary">Visualizza</a>
                 <a href="{{route('admin.posts.edit', $post->id)}}" class="btn btn-secondary">Modifica</a>
@@ -38,6 +44,17 @@
         @endforeach
         </tbody>
       </table>
+
+      <h2>Post per categorie</h2>
+      @foreach ($categories as $category)
+          <strong>{{ $category->name }}</strong>
+          @forelse ($category->posts as $post)
+              <p><a href="{{route('admin.posts.show', $post->slug)}}">{{ $post->title }}</a></p>
+          @empty
+              <p>Ancora nessun post per questa categoria, <a href="{{route('admin.posts.create', $post->slug)}}">aggiungine uno</a></p>
+          @endforelse
+      @endforeach
+
 </div>
     
 @endsection
