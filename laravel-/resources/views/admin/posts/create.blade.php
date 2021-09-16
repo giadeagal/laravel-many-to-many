@@ -48,7 +48,16 @@
           @enderror" cols="30" rows="10">{{old('content')}}</textarea>
               
             </div>
-            
+            <div class="mb-3">
+              <strong>Scegli un tag: </strong>
+              @foreach ($tags as $tag)
+                <div class="form-container d-block my-2">
+                  <input type="checkbox" id="tag{{ $loop->iteration }}" value="{{$tag->id}}"
+                  name="tags[]">
+                  <label for="tag{{ $loop->iteration }}" class="d-inline-block ml-2">{{$tag->name }}</label> 
+                </div>
+              @endforeach
+            </div>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
     </div>
